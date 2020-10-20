@@ -88,8 +88,8 @@ const float movePressMMSteps = (MotorSteps*moveMicroSteps)/PressMMRev;
 const float SpindlesMMSteps = (MotorSteps*MicroSteps)/SpindlesMMRev;
 
 const float Centralmm = 42;
-const float Leftmm = 85;
-const float Rightmm= 86;
+const float Leftmm = 84;
+const float Rightmm= 85.1 ;
 const float PressFmm = 5;
 const float PressMmm = 4;
 const float MovPress = 20;
@@ -1079,7 +1079,7 @@ void drill(){
      vel1=500;
     }
     if(steps>=LeftSteps-1200){
-     vel1=250;
+     vel1=750;
     }
     if(steps==LeftSteps-2400){
      digitalWrite(spindleI,LOW); // Conectado a relevador con lógica inversa
@@ -1113,7 +1113,7 @@ void drill(){
      vel1=500;
     }
     if(steps>=RightSteps-1200){
-     vel1=250;
+     vel1=750;
     }
     if(steps==RightSteps-2400){
      digitalWrite(spindleD,LOW); // Conectado a relevador
@@ -1260,6 +1260,7 @@ void loop(void) {
         for (int i=1; i<=space1Qty; i++){
           drill();
           movePressM(space1);
+          PressF(HIGH, PressFmm);
         }
         
         
