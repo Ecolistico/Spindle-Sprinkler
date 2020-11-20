@@ -89,7 +89,7 @@ const float movePressMMSteps = (MotorSteps*moveMicroSteps)/PressMMRev;
 const float SpindlesMMSteps = (MotorSteps*MicroSteps)/SpindlesMMRev;
 
 const float Centralmm = 42;
-const float Leftmm = 84.5;
+const float Leftmm = 83.8;
 const float Rightmm= 85.5 ;
 const float PressFmm = 5;
 const float PressMmm = 4;
@@ -135,7 +135,7 @@ int spaceSlider2[] = {95, 145, 70, 145 + 70, 145};
 int spaceSlider3[] = {174, 145, 70, 145 + 70, 145};
 int spaceSlider4[] = {253, 145, 70, 145 + 70, 145};
 
-int space1 = 200;
+int space1 = 80;
 int space1Qty = 10;
 int space2 = 50;
 int space2Qty = 0;
