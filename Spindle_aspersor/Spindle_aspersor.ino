@@ -20,15 +20,16 @@ MCUFRIEND_kbv tft;
 // copy-paste results from TouchScreen_Calibr_native.ino
 const int XP = 8, XM = A2, YP = A3, YM = 9; //240x320 ID=0x9341
 const int TS_LEFT = 140, TS_RT = 860, TS_TOP = 125, TS_BOT = 880;
-const int Orientation = 3; //0 and 2 are portrait and 1 and 3 landscape
+const int Orientation = 1; //0 and 2 are portrait and 1 and 3 landscape
 
 #include <AccelStepper.h>
 
 /*     Secuencia para hacer aspersores */
 /*     Definicion relevadores */
-const int spindleC = 15; //Spindle central
-const int spindleD = 14; // Spindle derecho
-const int spindleI = 16; // Spindle izquierdo
+const int relayA = 14; // relay aspiradora
+const int spindleD = 15; // Spindle derecho
+const int spindleC = 16; //Spindle central
+const int spindleI = 17; // Spindle izquierdo
 
 /* Definir pines de prensa fija*/
 const int stepPinPF = 18;
@@ -37,9 +38,9 @@ const int enablePF = 20;
 const int finish_PF = A5;
 
 /* Definir pines de prensa movil*/
-const int stepPinPM = 21 ;
-const int dirPinPM = 23;
-const int enablePM = 25;
+const int stepPinPM = 26 ;
+const int dirPinPM = 28;
+const int enablePM = 30;
 const int finish_PM = A6;
 
 /* Definir pines de desplazamiento prensa movil*/
@@ -88,8 +89,8 @@ const float movePressMMSteps = (MotorSteps*moveMicroSteps)/PressMMRev;
 const float SpindlesMMSteps = (MotorSteps*MicroSteps)/SpindlesMMRev;
 
 const float Centralmm = 42;
-const float Leftmm = 84;
-const float Rightmm= 85.1 ;
+const float Leftmm = 84.5;
+const float Rightmm= 85.5 ;
 const float PressFmm = 5;
 const float PressMmm = 4;
 const float MovPress = 20;
@@ -1050,6 +1051,9 @@ void drill(){
     if(steps==CentralSteps-1600){
      digitalWrite(spindleC,LOW); // Conectado a relevador con lógica inversa
     }
+    if(steps==CentralSteps-1000){
+     digitalWrite(relayA,LOW); // Conectado a relevador con lógica inversa
+    }
 
     digitalWrite(stepPinSPc,HIGH);
     delayMicroseconds(vel1);
@@ -1064,6 +1068,7 @@ void drill(){
     delayMicroseconds(vel1);
   }
   digitalWrite(spindleC,HIGH);
+  digitalWrite(relayA,HIGH);
   cerosSPc();
 
   //Movimiento de spindle izquierdo
@@ -1084,6 +1089,9 @@ void drill(){
     if(steps==LeftSteps-2400){
      digitalWrite(spindleI,LOW); // Conectado a relevador con lógica inversa
     }
+    if(steps==LeftSteps-1000){
+     digitalWrite(relayA,LOW); // Conectado a relevador con lógica inversa
+    }
 
     digitalWrite(stepPinSPi,HIGH);
     delayMicroseconds(vel1);
@@ -1098,6 +1106,7 @@ void drill(){
     delayMicroseconds(vel1);
   }
   digitalWrite(spindleI,HIGH);
+  digitalWrite(relayA,HIGH);
   cerosSPi();
 
   //Movimiento de spindle derecho
@@ -1118,6 +1127,9 @@ void drill(){
     if(steps==RightSteps-2400){
      digitalWrite(spindleD,LOW); // Conectado a relevador
     }
+    if(steps==RightSteps-1000){
+     digitalWrite(relayA,LOW); // Conectado a relevador
+    }
 
     digitalWrite(stepPinSPd,HIGH);
     delayMicroseconds(vel1);
@@ -1132,6 +1144,7 @@ void drill(){
     delayMicroseconds(vel1);
   }
   digitalWrite(spindleD,HIGH);
+  digitalWrite(relayA,HIGH);
   cerosSPd();
 }
 
@@ -1165,6 +1178,8 @@ void setup(void){
   tft.fillScreen(BLACK);
   waiting = millis();
 
+  pinMode(relayA,OUTPUT);
+  
   pinMode(stepPinSPc,OUTPUT);
   pinMode(dirPinSPc,OUTPUT);
   pinMode(enableSPc,OUTPUT);
@@ -1209,7 +1224,8 @@ void setup(void){
   digitalWrite(enableM,HIGH);
   
 
-  // Desactivar Spindles 
+  // Desactivar relays 
+  digitalWrite(relayA,HIGH);
   digitalWrite(spindleC,HIGH);
   digitalWrite(spindleD,HIGH);
   digitalWrite(spindleI,HIGH);
