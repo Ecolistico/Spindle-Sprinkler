@@ -45,7 +45,7 @@ const int finish_PM = A6;
 
 /* Definir pines de desplazamiento prensa movil*/
 const int stepPinM = 27;
-const int dirPinM = 29;
+const int dirPinM = 25;
 AccelStepper stepperM(AccelStepper::DRIVER, stepPinM, dirPinM);
 const int enableM = 31;
 const int finish_M = A7;
@@ -879,30 +879,33 @@ void cerosPM(){
 void cerosM(){
   digitalWrite(enableM,LOW);
   bool setup_motors=false;
-  stepperM.moveTo(-220*200*4/2); //steps para mover 220mm para asegurar cero
+  stepperM.moveTo(88000); //steps para mover 220mm para asegurar cero
   while(setup_motors==false){
   /*** Cero movimiento de Prensa movil ***/
     if(digitalRead(finish_M)==HIGH){
       stepperM.run();
     }
-    if(digitalRead(finish_M)==LOW){
+    else if(digitalRead(finish_M)==LOW){
       setup_motors=true;
+      stepperM.stop();
       stepperM.setCurrentPosition(0);
+      delay(100);
+      stepperM.moveTo(-88000); //steps para mover 5mm para salir de fin de carrera    
     }
   }
-  delay(100);
-  stepperM.moveTo(200*200*4/2); //steps para mover 5mm para salir de fin de carrera
   while(setup_motors==true){
     if(digitalRead(finish_M)==LOW){
       stepperM.run();
     }
-    if(digitalRead(finish_M)==HIGH){
+    else if(digitalRead(finish_M)==HIGH){
       setup_motors=false;
+      stepperM.stop();
       stepperM.setCurrentPosition(0);
     }
   }
   digitalWrite(enableM,HIGH);
 }
+
 void cerosSPc(){
   digitalWrite(enableSPc,LOW);
   digitalWrite(dirPinSPc,LOW);
