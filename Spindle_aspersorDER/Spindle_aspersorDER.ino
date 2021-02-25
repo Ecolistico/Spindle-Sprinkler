@@ -45,7 +45,7 @@ const int finish_PM = A6;
 
 /* Definir pines de desplazamiento prensa movil*/
 const int stepPinM = 27;
-const int dirPinM = 25;
+const int dirPinM = 29;
 AccelStepper stepperM(AccelStepper::DRIVER, stepPinM, dirPinM);
 const int enableM = 31;
 const int finish_M = A7;
@@ -89,8 +89,8 @@ const float movePressMMSteps = -100;
 const float SpindlesMMSteps = (MotorSteps*MicroSteps)/SpindlesMMRev;
 
 const float Centralmm = 16.5;
-const float Leftmm = 27.5;
-const float Rightmm= 27.8;
+const float Leftmm = 26;
+const float Rightmm= 26;
 const float PressFmm = 5;
 const float PressMmm = 5;
 
