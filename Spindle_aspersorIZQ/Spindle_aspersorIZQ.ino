@@ -1044,25 +1044,24 @@ void drill(){
     if(steps>=6000 && steps<CentralSteps-2500){
      vel1=100;
     }
-    if(steps>=CentralSteps-2500){
-     vel1=2000;
+    if(steps>=CentralSteps-1000){
+     vel1=1500;
     }
-    if(steps>=CentralSteps-800){
+    if(steps>=CentralSteps-700){
      vel1=3000;
     }
-    if(steps==CentralSteps-1600){
-     digitalWrite(spindleC,LOW); // Conectado a relevador con lógica inversa
-    }
     if(steps==CentralSteps-1000){
-     digitalWrite(relayA,LOW); // Conectado a relevador con lógica inversa
+     digitalWrite(spindleC,LOW); // Conectado a relevador con lógica inversa
+     digitalWrite(relayA,LOW);
     }
-
     digitalWrite(stepPinSPc,HIGH);
     delayMicroseconds(vel1);
     digitalWrite(stepPinSPc,LOW);
     delayMicroseconds(vel1);
   }
+  
   digitalWrite(dirPinSPc, LOW);
+    vel1 = 1500;
   for ( int steps = 0; steps < 2*SpindlesMMSteps; steps++){
     digitalWrite(stepPinSPc,HIGH);
     delayMicroseconds(vel1);
