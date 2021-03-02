@@ -135,7 +135,7 @@ int spaceSlider3[] = {174, 145, 70, 145 + 70, 145};
 int spaceSlider4[] = {253, 145, 70, 145 + 70, 145};
 
 int space1 = 100;
-int space1Qty = 10;
+int space1Qty = 59;
 int space2 = 50;
 int space2Qty = 0;
 int space3 = 50;
