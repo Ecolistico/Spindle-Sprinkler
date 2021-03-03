@@ -45,7 +45,7 @@ const int finish_PM = A6;
 
 /* Definir pines de desplazamiento prensa movil*/
 const int stepPinM = 27;
-const int dirPinM = 25;
+const int dirPinM = 29;
 AccelStepper stepperM(AccelStepper::DRIVER, stepPinM, dirPinM);
 const int enableM = 31;
 const int finish_M = A7;
@@ -79,17 +79,17 @@ int left_pos=0;
 int aux_left;
 int right_pos=0;
 int aux_right;
-const int PressMMRev = 8;
+const int PressMMRev = 2;
 const int SpindlesMMRev = 8;
 const int MotorSteps = 200;
 const int MicroSteps = 16;
 const int moveMicroSteps = 4;
 const float PressMMSteps = (MotorSteps*MicroSteps)/PressMMRev;
-const float movePressMMSteps = -100;
+const float movePressMMSteps = 100;
 const float SpindlesMMSteps = (MotorSteps*MicroSteps)/SpindlesMMRev;
 
 const float Centralmm = 16.7;
-const float Leftmm = 28.6;
+const float Leftmm = 28.2;
 const float Rightmm= 27.8;
 const float PressFmm = 5;
 const float PressMmm = 7;
@@ -878,7 +878,7 @@ void cerosPM(){
 void cerosM(){
   digitalWrite(enableM,LOW);
   bool setup_motors=false;
-  stepperM.moveTo(88000); //steps para mover 220mm para asegurar cero
+  stepperM.moveTo(-88000); //steps para mover 220mm para asegurar cero
   while(setup_motors==false){
   /*** Cero movimiento de Prensa movil ***/
     if(digitalRead(finish_M)==HIGH){
@@ -889,7 +889,7 @@ void cerosM(){
       stepperM.stop();
       stepperM.setCurrentPosition(0);
       delay(100);
-      stepperM.moveTo(-88000); //steps para mover 5mm para salir de fin de carrera    
+      stepperM.moveTo(88000); //steps para mover 5mm para salir de fin de carrera    
     }
   }
   while(setup_motors==true){
@@ -1084,7 +1084,7 @@ void drill(){
      vel1=100;
     }
     if(steps>=LeftSteps-2400){
-     vel1=250;
+     vel1=500;
     }
     if(steps>=LeftSteps-1200){
      vel1=750;
@@ -1102,7 +1102,6 @@ void drill(){
     delayMicroseconds(vel1);
   }
   digitalWrite(dirPinSPi, LOW);
-  vel1=500;
   for ( int steps = 0; steps < 5*SpindlesMMSteps; steps++){
     digitalWrite(stepPinSPi,HIGH);
     delayMicroseconds(vel1);
@@ -1123,7 +1122,7 @@ void drill(){
      vel1=100;
     }
     if(steps>=RightSteps-2400){
-     vel1=250;
+     vel1=500;
     }
     if(steps>=RightSteps-1200){
      vel1=750;
@@ -1141,7 +1140,6 @@ void drill(){
     delayMicroseconds(vel1);
   }
   digitalWrite(dirPinSPd, LOW);
-  vel1=500;
   for ( int steps = 0; steps < 5*SpindlesMMSteps; steps++){
     digitalWrite(stepPinSPd,HIGH);
     delayMicroseconds(vel1);
