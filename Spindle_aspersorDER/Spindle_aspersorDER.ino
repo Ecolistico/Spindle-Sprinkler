@@ -88,11 +88,11 @@ const float PressMMSteps = (MotorSteps*MicroSteps)/PressMMRev;
 const float movePressMMSteps = -100;
 const float SpindlesMMSteps = (MotorSteps*MicroSteps)/SpindlesMMRev;
 
-const float Centralmm = 16.5;
-const float Leftmm = 26;
-const float Rightmm= 26;
+const float Centralmm = 16.3;
+const float Leftmm = 26.6;
+const float Rightmm= 28.8;
 const float PressFmm = 5;
-const float PressMmm = 5;
+const float PressMmm = 7;
 
 
 
@@ -134,8 +134,8 @@ int spaceSlider2[] = {95, 145, 70, 145 + 70, 145};
 int spaceSlider3[] = {174, 145, 70, 145 + 70, 145};
 int spaceSlider4[] = {253, 145, 70, 145 + 70, 145};
 
-int space1 = 80;
-int space1Qty = 10;
+int space1 = 100;
+int space1Qty = 59;
 int space2 = 50;
 int space2Qty = 0;
 int space3 = 50;
@@ -1045,11 +1045,11 @@ void drill(){
      vel1=100;
     }
     if(steps>=CentralSteps-1000){
-     vel1=1500;
+     vel1=250;
     }
-    if(steps>=CentralSteps-700){
+    /*if(steps>=CentralSteps-700){
      vel1=3000;
-    }
+    }*/
     if(steps==CentralSteps-1600){
      digitalWrite(spindleC,LOW); // Conectado a relevador con lógica inversa
     }
@@ -1063,7 +1063,7 @@ void drill(){
   }
   
   digitalWrite(dirPinSPc, LOW);
-  vel1=1000; 
+  vel1=500; 
   for ( int steps = 0; steps < 2*SpindlesMMSteps; steps++){
     digitalWrite(stepPinSPc,HIGH);
     delayMicroseconds(vel1);
@@ -1084,7 +1084,7 @@ void drill(){
      vel1=100;
     }
     if(steps>=LeftSteps-2400){
-     vel1=500;
+     vel1=250;
     }
     if(steps>=LeftSteps-1200){
      vel1=750;
@@ -1102,6 +1102,7 @@ void drill(){
     delayMicroseconds(vel1);
   }
   digitalWrite(dirPinSPi, LOW);
+  vel1=500;
   for ( int steps = 0; steps < 5*SpindlesMMSteps; steps++){
     digitalWrite(stepPinSPi,HIGH);
     delayMicroseconds(vel1);
@@ -1122,7 +1123,7 @@ void drill(){
      vel1=100;
     }
     if(steps>=RightSteps-2400){
-     vel1=500;
+     vel1=250;
     }
     if(steps>=RightSteps-1200){
      vel1=750;
@@ -1140,6 +1141,7 @@ void drill(){
     delayMicroseconds(vel1);
   }
   digitalWrite(dirPinSPd, LOW);
+  vel1=500;
   for ( int steps = 0; steps < 5*SpindlesMMSteps; steps++){
     digitalWrite(stepPinSPd,HIGH);
     delayMicroseconds(vel1);
