@@ -88,9 +88,9 @@ const float PressMMSteps = (MotorSteps*MicroSteps)/PressMMRev;
 const float movePressMMSteps = -100;
 const float SpindlesMMSteps = (MotorSteps*MicroSteps)/SpindlesMMRev;
 
-const float Centralmm = 16.4;
-const float Leftmm = 28.4;
-const float Rightmm= 28.1;
+const float Centralmm = 17;
+const float Leftmm = 27.7; //-.5
+const float Rightmm= 26.6; //-1.4
 const float PressFmm = 6;
 const float PressMmm = 8;
 
@@ -1025,7 +1025,7 @@ void PressM (bool state, float movement = 0){
       digitalWrite(stepPinPM,LOW);
       delayMicroseconds(100);
     }
-    digitalWrite(enablePM, HIGH);
+    //digitalWrite(enablePM, HIGH);
   }
 } //(HIGH, mm) to close press (LOW) to open
 void drill(){
