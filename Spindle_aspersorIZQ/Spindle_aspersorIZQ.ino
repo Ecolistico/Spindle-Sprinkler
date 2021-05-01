@@ -88,7 +88,7 @@ const float PressMMSteps = (MotorSteps*MicroSteps)/PressMMRev;
 const float movePressMMSteps = -100;
 const float SpindlesMMSteps = (MotorSteps*MicroSteps)/SpindlesMMRev;
 
-const float Centralmm = 17.9;//+.4
+const float Centralmm = 17.5;//
 const float Leftmm = 27.9; //-.8
 const float Rightmm= 24.5; //
 const float PressFmm = 6;
